@@ -1,0 +1,5 @@
+.config/*
+.local/*
+.Rhistory
+derived_data/*.csv
+config.R
