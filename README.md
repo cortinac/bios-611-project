@@ -7,5 +7,5 @@ To build the Dockerfile:
 
 To set up the RStudio environment:
 
-`docker run -e PASSWORD=pw --rm -v $(pwd):/home/rstudio -p 8787:8787 -t bios611`
+`docker run -e PASSWORD=YOURPASSWORD --rm -v $(pwd):/home/rstudio/project -p 8787:8787 -t bios611`
 
