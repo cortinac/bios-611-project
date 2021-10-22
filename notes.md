@@ -17,3 +17,5 @@ This was done since some counties did not submit data or were unknown, so they a
 
 Considering only doing dates after August or September - will speed up downloading of data and avoids issues with vaccine eligibility
 Should also mean there are high enough vax rates to estimates populations
+
+Line graph shiny app shows something is wrong with the state rates!  SEE WA!!!
