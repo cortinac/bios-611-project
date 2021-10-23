@@ -19,3 +19,5 @@ Considering only doing dates after August or September - will speed up downloadi
 Should also mean there are high enough vax rates to estimates populations
 
 Line graph shiny app shows something is wrong with the state rates!  SEE WA!!!
+
+Order of files (for MakeFile: import_data.R -> clean_vax_data.R -> state_levels.R -> today.R -> (figures_today.R, shiny_today.R, line_graph.R)
