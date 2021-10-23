@@ -2,7 +2,7 @@
 # Get population estimates, state totals
 
 library(tidyverse)
-clean <- read_csv("project/derived_data/clean.csv")
+clean <- read_csv("~/project/derived_data/clean.csv")
 
 # Note: Populations will have some error. These are derived from the percents and counts
 with_pops <- clean %>%
@@ -69,7 +69,7 @@ states_nonmetro <- nonmetro_tot %>%
   mutate(onedose18 = (administered_dose1_recip_18plus_1/onedose18_1)*100) %>%
   mutate(onedose65 = (administered_dose1_recip_65plus_1/onedose65_1)*100)
 
-write_csv(states,"project/derived_data/states.csv")
-write_csv(states_metro,"project/derived_data/states_metro.csv")
-write_csv(states_nonmetro,"project/derived_data/states_nonmetro.csv")
+write_csv(states,"~/project/derived_data/states.csv")
+write_csv(states_metro,"~/project/derived_data/states_metro.csv")
+write_csv(states_nonmetro,"~/project/derived_data/states_nonmetro.csv")
 
