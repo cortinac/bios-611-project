@@ -5,10 +5,10 @@ library(tidyverse)
 library(shiny)
 library(plotly)
 
-clean <- read_csv("project/derived_data/clean.csv")
-states <- read_csv("project/derived_data/states.csv")
-states_metro <- read_csv("project/derived_data/states_metro.csv")
-states_nonmetro <- read_csv("project/derived_data/states_nonmetro.csv")
+clean <- read_csv("~/project/derived_data/clean.csv")
+states <- read_csv("~/project/derived_data/states.csv")
+states_metro <- read_csv("~/project/derived_data/states_metro.csv")
+states_nonmetro <- read_csv("~/project/derived_data/states_nonmetro.csv")
 
 s <- states %>% filter(recip_state=='NC')
 m <- states_metro %>% filter(recip_state=='NC')
@@ -31,6 +31,7 @@ ui <- shinyUI(fluidPage(
                                             choices=states_list,
                                             multiple=F)),
                 mainPanel(plotlyOutput("graph"))
+                
 )))
 
 server <- function(input, output) {
@@ -45,5 +46,3 @@ server <- function(input, output) {
 }
 
 shinyApp(ui=ui, server=server, options=list(port=8080, host="0.0.0.0"))
-  })
-}
