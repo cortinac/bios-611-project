@@ -36,7 +36,7 @@ This will take a few minutes to run. Once it is finished running, access the app
 To start the Shiny app directly from the command line, without running R studio, use the following:
 
 ```
-docker run -e PASSWORD=pw --rm -v $(pwd):/home/rstudio/project -p 8080:8080 -it bios611 sudo -H -u rstudio /bin/bash -c "cd ~/project; Rscript line_graphs_counties.R"
+docker run -e PASSWORD=YOURPASSWORD --rm -v $(pwd):/home/rstudio/project -p 8080:8080 -it bios611 sudo -H -u rstudio /bin/bash -c "cd ~/project; Rscript line_graphs_counties.R"
 ```
 
 After this is finished running, the app should be available through `localhost:8080` in your browser.
