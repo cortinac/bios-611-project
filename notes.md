@@ -22,3 +22,6 @@ Line graph shiny app shows something is wrong with the state rates!  SEE WA!!!
 
 Order of files (for MakeFile: import_data.R -> clean_vax_data.R -> state_levels.R -> today.R -> (figures_today.R, shiny_today.R, line_graph.R)
 line_graph_counties.R is straight from clean_vax_data.R
+
+Desired covariates - logistic or linear regression?  Date? Metro/non-metro. Inequality index. SES-related vars: income, education, home ownership.
+Basically, trying to get at whether there are accessibility issues with the vaccine.
