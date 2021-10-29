@@ -54,6 +54,6 @@ docker run -e PASSWORD=YOURPASSWORD --rm -v $(pwd):/home/rstudio/project -p 8080
 
 After this is finished running, the app should be available at `localhost:8080` in your browser.
 
-## Source
+## Sources
 
 Vaccination data from: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh
