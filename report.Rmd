@@ -1,0 +1,22 @@
+---
+title: "Midterm Report"
+author: "Christopher Cortina"
+date: "10/28/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![Average Completion Percent by Metro]("~/project/figures/avg.png")
+
+![Average Change from August 1 by Metro]("~/project/figures/avg_chg.png")
+
+![Overall Completion Rate by Metro]("~/project/figures/rate.png")
+
+![Average Completion Percent by Social Vulnerability Index]("~/project/figures/svi_avg.png")
+
+![Average Change from August 1 by Social Vulnerability Index]("~/project/figures/svi_chg.png")
+
+![Overall Completion Rate by Social Vulnerability Index]("~/project/figures/svi_rate.png")
