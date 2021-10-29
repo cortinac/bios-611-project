@@ -24,7 +24,7 @@ cd project
 make project.pdf
 ```
 
-Look for project.pdf in the project directory.
+Note that this requires an Internet connection in order to pull the data from the CDC API. This will take a few minutes to complete. Look for project.pdf in the project directory once R has finished running.
 
 ## Shiny App
 
