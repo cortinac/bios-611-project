@@ -1,5 +1,6 @@
 report.pdf: report.Rmd figures/avg_chg.png figures/avg.png figures/rate.png figures/svi_avg.png figures/svi_chg.png figures/svi_rate.png
 	R -e "rmarkdown::render('report.Rmd',output_format='pdf_document')"
+	rm Rplots.pdf
 
 PHONY: clean
 
