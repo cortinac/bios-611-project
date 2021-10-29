@@ -1,8 +1,6 @@
 # import_data.R
 # Import vaccination data from CDC API
 
-#source("config.R")
-
 library("RSocrata")
 library(tidyverse)
 

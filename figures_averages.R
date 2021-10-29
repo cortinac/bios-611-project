@@ -9,13 +9,11 @@ nonmetro_avg <- read_csv("~/project/derived_data/nonmetro_avg.csv")
 
 ggplot(us_avg, aes(date, complete)) + geom_line() + geom_line(data=metro_avg, color="red") +
   geom_line(data=nonmetro_avg, color="blue")
+ggsave("~/project/figures/avg.png")
 
-ggplot(us_avg, aes(date, complete18)) + geom_line() + geom_line(data=metro_avg, color="red") +
+ggplot(us_avg, aes(date, change)) + geom_line() + geom_line(data=metro_avg, color="red") +
   geom_line(data=nonmetro_avg, color="blue")
+ggsave("~/project/figures/avg_chg.png")
 
-us_rate <- read_csv("~/project/derived_data/us_rate.csv")
-metro_rate <- read_csv("~/project/derived_data/metro_rate.csv")
-nonmetro_rate <- read_csv("~/project/derived_data/nonmetro_rate.csv")
-
-ggplot(us_rate, aes(date, complete)) + geom_line() + geom_line(data=metro_rate, color="red") +
-  geom_line(data=nonmetro_rate, color="blue")
+# ggplot(us_avg, aes(date, onedose)) + geom_line() + geom_line(data=metro_avg, color="red") +
+#   geom_line(data=nonmetro_avg, color="blue")

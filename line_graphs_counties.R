@@ -1,8 +1,8 @@
 # line_graphs_counties.R
 # Create R Shiny app to look at line graphs for counties
 
-source("~/project/import_data.R")
-source("~/project/clean_vax_data.R")
+# source("~/project/import_data.R")
+# source("~/project/clean_vax_data.R")
 
 library(tidyverse)
 library(shiny)
