@@ -8,7 +8,7 @@ At the midterm point, graphs of the average rates, overall rates, and average ch
 First, use the following line in your shell to build the Docker image:
 
 ```
-docker build -t . bios611
+docker build . -t bios611
 ```
 
 Then set up the RStudio environment using the next line. Note that YOURPASSWORD can be replaced by any unique password you would like to use.
