@@ -12,3 +12,5 @@ m2m <- clean %>% filter(date == as.Date("2021-08-01") |
   mutate(prevdate=lag(date)) %>%
   mutate(prevcomplete=lag(series_complete_pop_pct)) %>%
   mutate(m2mchange=series_complete_pop_pct-prevcomplete)
+
+write_csv(clean, "~/project/derived_data/m2m.csv")

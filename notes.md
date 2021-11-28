@@ -25,3 +25,5 @@ line_graph_counties.R is straight from clean_vax_data.R
 
 Desired covariates - logistic or linear regression?  Date? Metro/non-metro. Inequality index. SES-related vars: income, education, home ownership.
 Basically, trying to get at whether there are accessibility issues with the vaccine.
+
+A note than in October multiple counties' vaccination rates drop. Can see in negative_chg.csv and using the Shiny app. Investigate why this is.
