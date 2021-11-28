@@ -3,6 +3,5 @@
 .Rhistory
 derived_data/*.csv
 config.R
-source_data/*.csv
 figures/*
 report.pdf
