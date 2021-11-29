@@ -2,7 +2,7 @@
 # get change for each day
 
 library(tidyverse)
-clean <- read_csv("~/project/derived_data/clean.csv")
+clean <- read_csv("~/project/derived_data/clean_svi.csv")
 
 lagtime <- 14
 

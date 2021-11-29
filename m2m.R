@@ -2,7 +2,7 @@
 # get month to month change
 
 library(tidyverse)
-clean <- read_csv("~/project/derived_data/clean.csv")
+clean <- read_csv("~/project/derived_data/clean_svi.csv")
 
 m2m <- clean %>% filter(date == as.Date("2021-08-01") |
                           date == as.Date("2021-09-01") |

@@ -3,7 +3,7 @@
 
 library(tidyverse)
 
-clean <- read_csv("~/project/derived_data/clean.csv")
+clean <- read_csv("~/project/derived_data/clean_svi.csv")
 
 clean1 <- clean %>%
   mutate(complete_pop = series_complete_yes/(series_complete_pop_pct/100)) %>%

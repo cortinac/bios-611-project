@@ -3,7 +3,7 @@
 
 library(tidyverse)
 
-clean <- read_csv("~/project/derived_data/clean.csv")
+clean <- read_csv("~/project/derived_data/clean_svi.csv")
 
 us_avg <- clean %>% group_by(date) %>% 
   summarize(complete=mean(series_complete_pop_pct),
