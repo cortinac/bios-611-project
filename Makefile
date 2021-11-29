@@ -41,6 +41,12 @@ derived_data/chg.csv: derived_data/clean.csv chg.R
 	
 derived_data/negative_chg.csv: derived_data/chg.csv negative_chg.R
 	Rscript negative_chg.R
+	
+derived_data/svi_themes.csv: source_data/SVI2018_US_COUNTY.csv clean_svi.R
+	Rscript clean_svi.R
+	
+derived_data/clean_svi.csv: derived_data/svi_themes.csv derived_data/clean.csv merge_svi.R
+	merge_svi.R
 
 figures/svi_avg.png figures/svi_chg.png: derived_data/us_avg.csv derived_data/svi_a.csv derived_data/svi_b.csv derived_data/svi_c.csv derived_data/svi_d.csv svi_figures.R
 	Rscript svi_figures.R
