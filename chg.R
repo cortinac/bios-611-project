@@ -4,7 +4,7 @@
 library(tidyverse)
 clean <- read_csv("~/project/derived_data/clean_svi.csv")
 
-lagtime <- 14
+lagtime <- 30
 
 chg <- clean %>%
   group_by(recip_county, recip_state) %>%

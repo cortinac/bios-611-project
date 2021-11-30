@@ -54,6 +54,16 @@ figures/svi_avg.png figures/svi_chg.png: derived_data/us_avg.csv derived_data/sv
 figures/svi_rate.png: derived_data/us_rate.csv derived_data/svi_a_rate.csv derived_data/svi_b_rate.csv derived_data/svi_c_rate.csv derived_data/svi_d_rate.csv svi_rate.R
 	Rscript svi_rate.R
 	
+derived_data/clean1115.csv: derived_data/chg.csv model_data.R
+	Rscript model_data.R
+	
+figures/themes.png figures/themes_aug1.png figures/themes_chg30.png\
+figures/theme1.png figures/theme1_aug1.png figures/theme1_chg30.png\
+figures/theme2.png figures/theme2_aug1.png figures/theme2_chg30.png\
+figures/theme3.png figures/theme3_aug1.png figures/theme3_chg30.png\
+figures/theme4.png figures/theme4_aug1.png figures/theme4_chg30.png: derived_data/clean1115.csv themes_scatter.R
+	Rscript themes_scatter.R
+	
 PHONY: shiny
 
 shiny: derived_data/clean.csv line_graphs_counties.R
