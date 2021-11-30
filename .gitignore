@@ -5,3 +5,4 @@ derived_data/*.csv
 config.R
 figures/*
 report.pdf
+Rplots.pdf
