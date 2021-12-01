@@ -7,6 +7,7 @@ PHONY: clean
 clean:
 	rm -f derived_data/*
 	rm -f figures/*
+	rm -f histograms/*
 	rm -f report.pdf
 
 derived_data/vax_data.csv: import_data.R
@@ -63,6 +64,12 @@ figures/theme2.png figures/theme2_aug1.png figures/theme2_chg30.png\
 figures/theme3.png figures/theme3_aug1.png figures/theme3_chg30.png\
 figures/theme4.png figures/theme4_aug1.png figures/theme4_chg30.png: derived_data/clean1115.csv themes_scatter.R
 	Rscript themes_scatter.R
+	
+derived_data/pca1.csv derived_data/pca2.csv: derived_data/clean1115.csv pca.R
+	Rscript pca.R
+	
+figures/pca1_rate.png figures/pca2_rate.png figures/pca1_chg.png figures/pca2_chg.png: derived_data/pca1.csv derived_data/pca2.csv pca_figures.R
+	Rscript pca_figures.R
 	
 PHONY: shiny
 
