@@ -1,22 +1,152 @@
 ---
-title: "Midterm Report"
+title: "COVID-19 Vaccines and Social Vulnerability Index"
 author: "Christopher Cortina"
-date: "10/28/2021"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+
+clean1115 <- read_csv("~/project/derived_data/clean1115.csv")
+clean1 <- read_csv("~/project/derived_data/clean1.csv")
+clean2 <- read_csv("~/project/derived_data/clean2.csv")
 ```
 
-![Average Completion Percent by Metro]("~/project/figures/avg.png")
+## Introduction
 
-![Average Change from August 1 by Metro]("~/project/figures/avg_chg.png")
+Throughout the United States there are wildly varying COVID-19 vaccination rates. While vaccine hesitance is often discussed as a chief reason for people not getting the vaccine, simple lack of access to vaccines was also discussed, especially in the first few months that the vaccine was available. Vaccines could be less accessible for populations that live in less metropolitan areas, where it is more difficult to find a vaccine clinic, or in populations that are considered more vulnerable, where it may be more difficult for people to get the vaccine for a variety of reasons. This project attempts to see if there is some relationship between county-level COVID-19 vaccination rates and the CDC's Social Vulnerability Index (SVI), which using multiple factors to attempt to identify populations that may be more at risk during public health emergencies.
 
-![Overall Completion Rate by Metro]("~/project/figures/rate.png")
+## The Data
 
-![Average Completion Percent by Social Vulnerability Index]("~/project/figures/svi_avg.png")
+This project looks at the county-level rate of the complete vaccine series using [data from the CDC][data1]. A person has completed the complete vaccine series if they have received two doses of either the Moderna or the Pfizer/BioNTech vaccine or if they have received one dose of the Johnson & Johnson vaccine. The main analysis will look at a cross-section of the data on November 30, 2021, and will look at both the vaccine rate on that date and the change in the vaccine rate from August 1, 2021. This date was chosen to try to minimize the effects of early vaccine eligibility differences between states and any access issues that have been resolved before then. This data also contains a variable that categorizes a county as metro or non-metro, along with an SVI categorical variable.
 
-![Average Change from August 1 by Social Vulnerability Index]("~/project/figures/svi_chg.png")
+The SVI data comes from the [CDC/ATSDR (Agency for Toxic Substances and Disease Registry) Social Vulnerability Index][data2] data set for 2018. This data set combines 15 different factors into four vulnerability themes: socioeconomic status, household composition & disability, minority status & language, and housing type & transportation. These are presented as percentiles and then combined into an overall social vulnerability index, also presented as a percentile. A higher score means that the county is considered more vulnerable. Table 1 describes the variables in the SVI data set.
 
-![Overall Completion Rate by Social Vulnerability Index]("~/project/figures/svi_rate.png")
+Table 1: Description of Social Vulnerability Index Variables
+
+```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- '  
+| Theme           | Variable      |
+|-----------------|---------------|
+| 1: Socioeconomic Status | Below Poverty  |
+|                         | Unemployed     |
+|                         | Income      |
+|                         | No High School Diploma |
+| 2: Household Composition & Disability | Aged 65 or Older |
+|                                       | Aged 17 or Younger |
+|                                       | Civilian with a Disability |
+|                                       | Single-Parent Households |
+| 3: Minority Status & Language | Minority |
+|                               | Aged 5 or Older who Speaks English "Less than Well" |
+| 4: Housing Type & Transportation | Mutli-Unit Structures |
+|                                  | Mobile Homes |
+|                                  | Crowding |
+|                                  | No Vehicle |
+|                                  | Group Quarters |
+'
+cat(tabl)
+```
+
+## Vaccine Data
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean1 <- format(mean(clean1115$series_complete_pop_pct), digits=3)
+mean2 <- format(mean(clean1115$chg_aug_1), digits=3)
+
+metro_means <- clean1115 %>% group_by(metro_status) %>% summarize(mean(series_complete_pop_pct), mean(chg_aug_1))
+
+m1 <- format(metro_means$`mean(series_complete_pop_pct)`[1], digits=3)
+m2 <- format(metro_means$`mean(series_complete_pop_pct)`[2], digits=3)
+c1 <- format(metro_means$`mean(chg_aug_1)`[1], digits=3)
+c2 <- format(metro_means$`mean(chg_aug_1)`[2], digits=3)
+```
+
+Figures 1 and 2 compare the COVID-19 vaccination rate of the average US county to the average metro county and the average non-metro county from August 1 to November 30. Metro counties appear to have a higher average vaccination rate, both looking at the rate and at the change from August 1. On November 30, the average rate for a metro county was `r m1`%, and the average rate for a non-metro county was `r m2`%. The average for all US counties as `r mean1`%.  From August first, the metro counties saw an increase of `r c1` percentage points on average, the non-metro counties saw an increase of `r c2` percentage points, and the average US county saw in increase of `r mean2` percentage points.
+
+![Average Completion Percent by Metro]("~/project/figures/avg.png"){width=55%} 
+![Average Change from August 1 by Metro]("~/project/figures/avg_chg.png"){width=55%}
+
+Figure 1: Average Completion Percent by Metro (left)
+
+Figure 2: Average Change from August 1 by Metro (right)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+svi_means <- clean1115 %>% group_by(svi_ctgy) %>% summarize(mean(series_complete_pop_pct), mean(chg_aug_1))
+
+svi1 <- format(svi_means$`mean(series_complete_pop_pct)`[1], digits=3)
+svi2 <- format(svi_means$`mean(chg_aug_1)`[4], digits=3)
+```
+
+Figures 3 and 4 compare the COVID-19 vaccination rate of the average US county to the average counties of each SVI quartile. Group A has an SVI percentile of 0 to 25, Group B has a percentile of 25 to 50, Group C has a percentile of 50 to 75, and Group D has a percentile of 75 to 100. It appears that Group A has the highest vaccination rate, with a rate of `r svi1`%, with the rate decreasing as we go to less vulnerable groups. The change from August 1 score has Group D - the most vulnerable group - with the highest change at an increase of `r svi2` percentage points, and the other three groups about even.
+
+![Average Completion Percent by Social Vulnerability Index Quartile]("~/project/figures/svi_avg.png"){width=55%}
+![Average Change from August 1 by Social Vulnerability Index Quartile]("~/project/figures/svi_chg.png"){width=55%}
+
+Figure 3: Average Completion Percent by Social Vulnerability Index Quartile (left)
+
+Figure 4: Average Change from August 1 by Social Vulnerability Index Quartile (right)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+tot <- clean1115 %>% tally()
+tot1 <- clean1 %>% tally()
+tot2 <- clean2 %>% tally()
+```
+
+These plots also show at least one potential issue with the vaccination data. At certain points in time, the vaccination rates decrease. A closer look at the county-by-county vaccination data, available through the R Shiny app, shows that this is the case in multiple counties' raw data. Also, some counties, such as those in Texas or Hawai'i, only begin reporting data in October, which potentially inaccurate rates. To try to help mitigate the effects of these problems, only counties with a non-missing change from August 1 greater or equal to 0 were included in the analysis. Also, all data points with a vaccination rate of 0 are removed and assumed to be missing. The final data set for analysis contains `r tot$n` counties. Outliers were then removed for the linear regression and PCA analyses. Outliers were those that were less than Q1 - (1.5 IQR) and greater than Q3 + (1.5 IQR), where Q1 and Q3 were the 1st and 3rd quartile values, respectively, and IQR is the interquartile range, calculated as Q3 - Q1. Thus we have `r tot1$n` counties for the rate on November 31 analysis, and `r tot2$n` counties for the change from August 1 analysis.
+
+## Vaccinations vs. Social Vulnerability Index
+
+A general idea of the relationship between vaccination rate the SVI can be seen in the below scatterplots (Figures 5 and 6), which show the rate and the change from August 1 on November 30. There appears to be a slight decrease in vaccination rate as the SVI score gets higher (indicating more vulnerable counties), and perhpas a slight increase in change from August 1 as the SVI score gets higher, but any slope is too slight and has too much variation to say much from these figures.
+
+![]("~/project/figures/themes.png"){width=75%}
+
+Figure 5: COVID-19 Vaccination Rate vs. Overall SVI
+
+![]("~/project/figures/themes_aug1.png"){width=75%}
+
+Figure 6: Change in COVID-19 Vaccination Rate from August 1 vs. Overall SVI
+
+## Linear Regression
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("~/project/lin_model.R")
+rsq1 <- format(summary(lm1)$adj.r.squared, digits=3)
+rsq2 <- format(summary(lm2)$adj.r.squared, digits=3)
+rsq1_1 <- format(summary(lm1_1)$adj.r.squared, digits=3)
+rsq2_1 <- format(summary(lm2_1)$adj.r.squared, digits=3)
+```
+
+Linear regression models were run with both the vaccine rate on November 30 and the change from August 1 as outcomes. One model was run with the four theme scores (as percentiles), percent uninsured, and metro status as covariates. A second model was run with the fifteen SVI variables (as percents), percent uninsured, and metro status as covariates.
+
+The below table 2 shows the result of the model run with vaccine rate on November 31 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq1` Table 3 shows the result of the model run with the change in vaccine rate from August 1 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq2`.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+t1 <- coef(summary(lm1))
+kable(t1, caption="Linear regression results of vaccine rate vs. SVI themes")
+kable(coef(summary(lm2)), caption="Linear regression results of change in vaccine rate from August 1 vs. SVI themes")
+```
+
+We can see that at the 0.05 alpha level, many of these covariates have significant p-values in both models. The R squared, however, is fairly low, so it seems that the model does not fit the data very well.
+
+The below table 4 shows the result of the model run with vaccine rate on November 31 as the outocme and the individual SVI variables as the covariates. The adjusted R squared for this model is `r rsq1_1` Table 5 shows the result of the model run with the change in vaccine rate from August 1 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq2_1`.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+kable(coef(summary(lm1_1)), caption="Linear regression results of vaccine rate vs. SVI variables")
+kable(coef(summary(lm2_1)), caption="Linear regression results of change in vaccine rate from August 1 vs. SVI variables")
+```
+
+Again, at the 0.05 alpha level, many of these covariates have significant p-values for both outcomes. The R squared values are again fairly low, indicating a poor fit.
+
+## PCA
+
+
+
+## Citations
+Centers for Disease Control and Prevention. COVID-19 Vaccinations in the United States,County. https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh. Accessed on `r format(Sys.Date(), '%B %d, %Y')`.
+
+Centers for Disease Control and Prevention/ Agency for Toxic Substances and Disease Registry/ Geospatial Research, Analysis, and Services Program. CDC/ATSDR Social Vulnerability Index 2018 Database US. https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html. Accessed on November 11, 2021. 
+
+[data1]:https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh
+[data2]:https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html
