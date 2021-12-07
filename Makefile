@@ -58,11 +58,14 @@ figures/svi_rate.png: derived_data/us_rate.csv derived_data/svi_a_rate.csv deriv
 derived_data/clean1115.csv: derived_data/chg.csv model_data.R
 	Rscript model_data.R
 	
-figures/themes.png figures/themes_aug1.png figures/themes_chg30.png\
-figures/theme1.png figures/theme1_aug1.png figures/theme1_chg30.png\
-figures/theme2.png figures/theme2_aug1.png figures/theme2_chg30.png\
-figures/theme3.png figures/theme3_aug1.png figures/theme3_chg30.png\
-figures/theme4.png figures/theme4_aug1.png figures/theme4_chg30.png: derived_data/clean1115.csv themes_scatter.R
+derived_data/clean1.csv derived_data/clean2.csv: derived_data/clean1115.csv outliers.R
+	Rscript outliers.R
+	
+figures/themes.png figures/themes_aug1.png\
+figures/theme1.png figures/theme1_aug1.png\
+figures/theme2.png figures/theme2_aug1.png\
+figures/theme3.png figures/theme3_aug1.png\
+figures/theme4.png figures/theme4_aug1.png: derived_data/clean1115.csv themes_scatter.R
 	Rscript themes_scatter.R
 	
 derived_data/pca1.csv derived_data/pca2.csv: derived_data/clean1115.csv pca.R
