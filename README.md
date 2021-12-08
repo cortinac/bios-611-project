@@ -1,9 +1,9 @@
-BIOS 611 Project
+COVID-19 Vaccinations and Social Vulnerability Index
 =================
 
-This project looks at the CDC's county-level vaccination data over time since August 1, 2021. Currently, it looks at the rates in metro versus non-metro counties and it breaks up counties based on the CDC's Social Vulerability Index (SVI).
+This project looks at the CDC's county-level vaccination data over time since August 1, 2021 and on November 31, 2021. The project looks at different indicators from the CDC's Social Vulnerability Index, along with other factors such as the county's metro status, to see if there is a relationship between these and county-level COVID-19 vaccination rates. The project looks at both the rate on November 31 and the change in rate from August 1 to November 1.
 
-At the midterm point, graphs of the average rates, overall rates, and average change in rate since August 1 are available in report.pdf. These can be accessed using the below instructions.
+The final report can be found in report.pdf. This can be accessed using the following instructions:
 
 First, use the following line in your shell to build the Docker image:
 
