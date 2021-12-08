@@ -1,6 +1,8 @@
 # pca_figures.R
 # Create scatter plots from PCA analysis
 
+library(tidyverse)
+
 pca1 <- read_csv("~/project/derived_data/pca1.csv")
 pca2 <- read_csv("~/project/derived_data/pca2.csv")
 pca3 <- read_csv("~/project/derived_data/pca3.csv")

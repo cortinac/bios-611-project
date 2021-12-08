@@ -1,6 +1,8 @@
 # outliers.R
 # Remove outliers
 
+library(tidyverse)
+
 clean1115 <- read_csv("~/project/derived_data/clean1115.csv")
 
 q1 <- quantile(clean1115$series_complete_pop_pct, probs=c(.25, .75), na.rm = FALSE)
