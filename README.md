@@ -57,3 +57,5 @@ After this is finished running, the app should be available at `localhost:8080` 
 ## Sources
 
 Vaccination data from: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh
+
+SVI data from: https://www.atsdr.cdc.gov/placeandhealth/svi/documentation/SVI_documentation_2018.html
