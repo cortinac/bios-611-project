@@ -1,6 +1,6 @@
 report.pdf: report.Rmd figures/avg_chg.png figures/avg.png figures/rate.png figures/svi_avg.png figures/svi_chg.png figures/svi_rate.png\
 derived_data/clean1115.csv derived_data/clean1.csv derived_data/clean2.csv figures/pca1_rate.png figures/pca2_rate.png figures/pca1_chg.png\
-figures/pca2_chg.png figures/themes.png figures/themes_aug1.png
+figures/pca2_chg.png figures/themes.png figures/themes_aug1.png lin_models
 	R -e "rmarkdown::render('report.Rmd',output_format='pdf_document')"
 	rm Rplots.pdf
 
@@ -79,6 +79,10 @@ figures/pca1_rate.png figures/pca2_rate.png figures/pca1_chg.png figures/pca2_ch
 derived_data/pca3.csv derived_data/pca4.csv pca_figures.R
 	Rscript pca_figures.R
 	
+PHONY: lin_models
+lin_models: derived_data/clean1.csv derived_data/clean2.csv lin_model.R
+	Rscript lin_model.R
+
 PHONY: shiny
 
 shiny: derived_data/clean.csv line_graphs_counties.R
