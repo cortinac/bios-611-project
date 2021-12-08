@@ -1,4 +1,6 @@
-report.pdf: report.Rmd figures/avg_chg.png figures/avg.png figures/rate.png figures/svi_avg.png figures/svi_chg.png figures/svi_rate.png
+report.pdf: report.Rmd figures/avg_chg.png figures/avg.png figures/rate.png figures/svi_avg.png figures/svi_chg.png figures/svi_rate.png\
+derived_data/clean1115.csv derived_data/clean1.csv derived_data/clean2.csv figures/pca1_rate.png figures/pca2_rate.png figures/pca1_chg.png\
+figures/pca2_chg.png figures/themes.png figures/themes_aug1.png
 	R -e "rmarkdown::render('report.Rmd',output_format='pdf_document')"
 	rm Rplots.pdf
 
@@ -7,7 +9,6 @@ PHONY: clean
 clean:
 	rm -f derived_data/*
 	rm -f figures/*
-	rm -f histograms/*
 	rm -f report.pdf
 
 derived_data/vax_data.csv: import_data.R
@@ -68,10 +69,14 @@ figures/theme3.png figures/theme3_aug1.png\
 figures/theme4.png figures/theme4_aug1.png: derived_data/clean1115.csv themes_scatter.R
 	Rscript themes_scatter.R
 	
-derived_data/pca1.csv derived_data/pca2.csv: derived_data/clean1115.csv pca.R
+derived_data/pca1.csv derived_data/pca2.csv: derived_data/clean1.csv pca.R
 	Rscript pca.R
 	
-figures/pca1_rate.png figures/pca2_rate.png figures/pca1_chg.png figures/pca2_chg.png: derived_data/pca1.csv derived_data/pca2.csv pca_figures.R
+derived_data/pca3.csv derived_data/pca4.csv: derived_data/clean2.csv pca2.R
+	Rscript pca2.R
+	
+figures/pca1_rate.png figures/pca2_rate.png figures/pca1_chg.png figures/pca2_chg.png: derived_data/pca1.csv derived_data/pca2.csv\
+derived_data/pca3.csv derived_data/pca4.csv pca_figures.R
 	Rscript pca_figures.R
 	
 PHONY: shiny
