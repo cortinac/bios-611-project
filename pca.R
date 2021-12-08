@@ -20,10 +20,12 @@ pca_set2 <- c %>% select(EP_POV, EP_UNEMP, EP_PCI, EP_NOHSDP, EP_AGE65, EP_AGE17
   as.matrix()
 
 r1 <- prcomp(pca_set1, center=T, scale=T)
-summary(r1)
+sum1_1 <- summary(r1)
+sum1_1
 
 r2 <- prcomp(pca_set2, center=T, scale=T)
-summary(r2)
+sum2_1 <- summary(r2)
+sum2_1
 
 r1_ <- r1$x %>% as_tibble() %>% mutate(index=1:nrow(.))
 r2_ <- r2$x %>% as_tibble() %>% mutate(index=1:nrow(.))

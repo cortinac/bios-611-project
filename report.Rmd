@@ -100,13 +100,11 @@ These plots also show at least one potential issue with the vaccination data. At
 
 A general idea of the relationship between vaccination rate the SVI can be seen in the below scatterplots (Figures 5 and 6), which show the rate and the change from August 1 on November 30. There appears to be a slight decrease in vaccination rate as the SVI score gets higher (indicating more vulnerable counties), and perhpas a slight increase in change from August 1 as the SVI score gets higher, but any slope is too slight and has too much variation to say much from these figures.
 
-![]("~/project/figures/themes.png"){width=75%}
+\setcounter{figure}{4}
 
-Figure 5: COVID-19 Vaccination Rate vs. Overall SVI
+![COVID-19 Vaccination Rate vs. Overall SVI]("~/project/figures/themes.png")
 
-![]("~/project/figures/themes_aug1.png"){width=75%}
-
-Figure 6: Change in COVID-19 Vaccination Rate from August 1 vs. Overall SVI
+![Change in COVID-19 Vaccination Rate from August 1 vs. Overall SVI]("~/project/figures/themes_aug1.png")
 
 ## Linear Regression
 
@@ -120,7 +118,7 @@ rsq2_1 <- format(summary(lm2_1)$adj.r.squared, digits=3)
 
 Linear regression models were run with both the vaccine rate on November 30 and the change from August 1 as outcomes. One model was run with the four theme scores (as percentiles), percent uninsured, and metro status as covariates. A second model was run with the fifteen SVI variables (as percents), percent uninsured, and metro status as covariates.
 
-The below table 2 shows the result of the model run with vaccine rate on November 31 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq1` Table 3 shows the result of the model run with the change in vaccine rate from August 1 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq2`.
+The below table 2 shows the result of the model run with vaccine rate on November 31 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq1`. Table 3 shows the result of the model run with the change in vaccine rate from August 1 as the outcome and the theme scores as the covariates. The adjusted R squared for this model is `r rsq2`. For the coefficients for the four themes, a positive coefficient indicates that vaccination rate is higher for higher SVI scores, implying that counties considered more vulnerable in that category have a higher vaccination rate. A negative coefficient indicates that higher vulnerability scores indicate a lower vaccination status.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 t1 <- coef(summary(lm1))
@@ -141,7 +139,37 @@ Again, at the 0.05 alpha level, many of these covariates have significant p-valu
 
 ## PCA
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("~/project/pca.R")
+var1 <- format(sum1_1$importance[3,2]*100, digits=3)
+var2 <- format(sum2_1$importance[3,2]*100, digits=3)
 
+source("~/project/pca2.R")
+var3 <- format(sum1_2$importance[3,2]*100, digits=3)
+var4 <- format(sum2_2$importance[3,2]*100, digits=3)
+```
+
+We can try to visualize any trends by using a principal component analysis of the SVI data, and graphing vaccination rates on top of the first two principal components. The below two plots were created by performing principal component analysis on the SVI themes, percent unemployed, and metro status. For the first plot, the first two principal components cover `r var1`% of the variance. For the second plot, the first two principal components cover `r var3`% of the variance. Note that these values should be close to identical or identical; however, any differences comes from the fact that outliers for the vaccination rate may not be the same as the outliers for the change from August 1st, so the two data sets may contain different counties.
+
+![PCA with SVI Themes with Vaccination Rate Overlay]("~/project/figures/pca1_rate.png")
+
+![PCA with SVI Themes with Change in Vaccination Rate from August 1st Overlay]("~/project/figures/pca1_chg.png")
+
+The below two plots were then created by performing principal component analysis on the individual SVI variables, percent unemployed, and metro status. For the first plot, the first two principal components cover `r var2`% of the variance. For the second plot, the first two principal components cover `r var4`% of the variance.
+
+![PCA with SVI Variables with Vaccination Rate Overaly]("~/project/figures/pca2_rate.png")
+
+![PCA with SVI Variables with Change in Vaccination Rate from August 1st Overlay]("~/project/figures/pca2_chg.png")
+
+All of these plots of the principal components generally show the same thing. Overall, it is evident that two components is not enough to cover most of the variance. It is also difficult to see much in terms of vaccination rates and principal components. For both vaccination rate plots, it appears that there might be a slight increase in vaccinatione rate as the first principal component decreases and the second principal component increases. For change from August 1st, there seems to be little relationship between the principal components and the vaccination rate.
+
+## Conclusion
+
+Overall, it is difficult to comfortably make any conclusions about the relationships between SVI variables and COVID-19 vaccination rates in counties in the United States. It does seem that less vulnerable counties may generally have higher COVID vaccination rates, but the data is too varied to really draw any conclusions. The best model was the themes linear regression model for vaccination rate. With an R squared of `r rsq1` it had significant p-values for socioeconomic status, minority status and language, housing type and transportation, uninsured, and metro status. A lower socioeconomic status score (i.e. higher income, less unemployment, etc.), and a higher minority status and housing score (i.e. a higher percentage of minorities and higher crowding, multi-unit structures, group housing, etc.) were associated with a higher vaccination rate on November 31. Similarly, a lower percent uninsured was associated with a higher vaccination score, and metro counties tended to have a higher vaccination status.
+
+Future projects could involve looking at interaction terms within the SVI data set and for the metro variable. It seems like many of these would be related, e.g., metro counties might have more multi-unit structures or more people without a vehicle due to good public transport options. Higher unemployment might also mean a higher percentage uninsured. An analysis of the SVI dataset by itself could lead to a better understanding of how these factors interact. A longitudinal analysis could also be interesting to see how vaccination rates change over time and whether certain SVI indicators change in importance as time goes on.
+
+\newpage
 
 ## Citations
 Centers for Disease Control and Prevention. COVID-19 Vaccinations in the United States,County. https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh. Accessed on `r format(Sys.Date(), '%B %d, %Y')`.
