@@ -63,7 +63,7 @@ c1 <- format(metro_means$`mean(chg_aug_1)`[1], digits=3)
 c2 <- format(metro_means$`mean(chg_aug_1)`[2], digits=3)
 ```
 
-Figures 1 and 2 compare the COVID-19 vaccination rate of the average US county to the average metro county and the average non-metro county from August 1 to November 30. Metro counties appear to have a higher average vaccination rate, both looking at the rate and at the change from August 1. On November 30, the average rate for a metro county was `r m1`%, and the average rate for a non-metro county was `r m2`%. The average for all US counties as `r mean1`%.  From August first, the metro counties saw an increase of `r c1` percentage points on average, the non-metro counties saw an increase of `r c2` percentage points, and the average US county saw in increase of `r mean2` percentage points.
+Figures 1 and 2 compare the COVID-19 vaccination rate of the average US county to the average metro county and the average non-metro county from August 1 to November 30. (Note that this is not the US rate or the overall rate of all the groups, but rather the average of each county's rate.) Metro counties appear to have a higher average vaccination rate, both looking at the rate and at the change from August 1. On November 30, the average rate for a metro county was `r m1`%, and the average rate for a non-metro county was `r m2`%. The average for all US counties as `r mean1`%.  From August first, the metro counties saw an increase of `r c1` percentage points on average, the non-metro counties saw an increase of `r c2` percentage points, and the average US county saw in increase of `r mean2` percentage points.
 
 ![Average Completion Percent by Metro]("~/project/figures/avg.png"){width=55%} 
 ![Average Change from August 1 by Metro]("~/project/figures/avg_chg.png"){width=55%}
@@ -102,9 +102,9 @@ A general idea of the relationship between vaccination rate the SVI can be seen 
 
 \setcounter{figure}{4}
 
-![COVID-19 Vaccination Rate vs. Overall SVI]("~/project/figures/themes.png")
+![COVID-19 Vaccination Rate vs. Overall SVI]("~/project/figures/themes.png"){width=90%}
 
-![Change in COVID-19 Vaccination Rate from August 1 vs. Overall SVI]("~/project/figures/themes_aug1.png")
+![Change in COVID-19 Vaccination Rate from August 1 vs. Overall SVI]("~/project/figures/themes_aug1.png"){width=90%}
 
 ## Linear Regression
 
@@ -149,17 +149,17 @@ var3 <- format(sum1_2$importance[3,2]*100, digits=3)
 var4 <- format(sum2_2$importance[3,2]*100, digits=3)
 ```
 
-We can try to visualize any trends by using a principal component analysis of the SVI data, and graphing vaccination rates on top of the first two principal components. The below two plots were created by performing principal component analysis on the SVI themes, percent unemployed, and metro status. For the first plot, the first two principal components cover `r var1`% of the variance. For the second plot, the first two principal components cover `r var3`% of the variance. Note that these values should be close to identical or identical; however, any differences comes from the fact that outliers for the vaccination rate may not be the same as the outliers for the change from August 1st, so the two data sets may contain different counties.
+We can try to visualize any trends by using a principal component analysis of the SVI data, and graphing vaccination rates on top of the first two principal components. Figures 7 and 8 were created by performing principal component analysis on the SVI themes, percent unemployed, and metro status. For Figure 7, the first two principal components cover `r var1`% of the variance. For Figure 8, the first two principal components cover `r var3`% of the variance. The colors for Figures 7 and 8 represent the county's vaccination rate or change in vaccination rate from August 1, respectively. Note that these values should be close to identical or identical; however, any differences comes from the fact that outliers for the vaccination rate may not be the same as the outliers for the change from August 1st, so the two data sets may contain different counties.
 
-![PCA with SVI Themes with Vaccination Rate Overlay]("~/project/figures/pca1_rate.png")
+![PCA with SVI Themes with Vaccination Rate Coloring]("~/project/figures/pca1_rate.png"){width=90%}
 
-![PCA with SVI Themes with Change in Vaccination Rate from August 1st Overlay]("~/project/figures/pca1_chg.png")
+![PCA with SVI Themes with Change in Vaccination Rate from August 1st Coloring]("~/project/figures/pca1_chg.png"){width=90%}
 
-The below two plots were then created by performing principal component analysis on the individual SVI variables, percent unemployed, and metro status. For the first plot, the first two principal components cover `r var2`% of the variance. For the second plot, the first two principal components cover `r var4`% of the variance.
+Figures 9 and 10 were then created by performing principal component analysis on the individual SVI variables, percent unemployed, and metro status. For Figure 9, the first two principal components cover `r var2`% of the variance. For Figure 10, the first two principal components cover `r var4`% of the variance. Once again, the colors for Figures 9 and 10 represent the county's vaccination rate or change in vaccination rate from August 1, respectively.
 
-![PCA with SVI Variables with Vaccination Rate Overaly]("~/project/figures/pca2_rate.png")
+![PCA with SVI Variables with Vaccination Rate Coloring]("~/project/figures/pca2_rate.png"){width=90%}
 
-![PCA with SVI Variables with Change in Vaccination Rate from August 1st Overlay]("~/project/figures/pca2_chg.png")
+![PCA with SVI Variables with Change in Vaccination Rate from August 1st Coloring]("~/project/figures/pca2_chg.png"){width=90%}
 
 All of these plots of the principal components generally show the same thing. Overall, it is evident that two components is not enough to cover most of the variance. It is also difficult to see much in terms of vaccination rates and principal components. For both vaccination rate plots, it appears that there might be a slight increase in vaccinatione rate as the first principal component decreases and the second principal component increases. For change from August 1st, there seems to be little relationship between the principal components and the vaccination rate.
 
