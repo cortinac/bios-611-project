@@ -1,5 +1,5 @@
 ---
-title: "COVID-19 Vaccines and Social Vulnerability Index"
+title: "COVID-19 Vaccination Rates and Social Vulnerability Index"
 author: "Christopher Cortina"
 output: pdf_document
 ---

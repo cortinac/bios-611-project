@@ -1,4 +1,4 @@
-COVID-19 Vaccinations and Social Vulnerability Index
+COVID-19 Vaccination Rates and Social Vulnerability Index
 =================
 
 This project looks at the CDC's county-level vaccination data over time since August 1, 2021 and on November 31, 2021. The project looks at different indicators from the CDC's Social Vulnerability Index, along with other factors such as the county's metro status, to see if there is a relationship between these and county-level COVID-19 vaccination rates. The project looks at both the rate on November 31 and the change in rate from August 1 to November 1.
